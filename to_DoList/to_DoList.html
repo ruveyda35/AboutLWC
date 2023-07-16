@@ -1,0 +1,62 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Yapilacak Isler" icon-name="action:approval">
+        <lightning-button-icon  icon-name="utility:save" variant="success" alternative-text="Save" slot="actions" title="Save" onclick={save}></lightning-button-icon>
+        
+                <lightning-layout padding="around-small" size="12">
+                    <lightning-layout-item padding="around-small" flexibility="grow">
+                        <lightning-input type="text" name="is" placeholder="yapilacak is adi..." onchange={handlechange} variant="label-hidden"> </lightning-input> 
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small">
+                        <lightning-button variant="brand" label="Ekle" title="titleName" onclick={handleClick}></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+                     
+            <template if:true={clean}>
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item padding="around-small" size="12">
+                        <ul class="slds-has-dividers_around-space">
+                            <template for:each={islerim} for:item="islerim">
+                                
+                                <li class="slds-item" key={islerim.id}>
+                                    <lightning-layout pull-to-boundary="small" padding="horizontal-small" vertical-align="center">
+                                        <lightning-layout-item padding="horizontal-large" flexibility="grow" >
+                                            <div class="custom-box">{islerim.name}</div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item padding="horizontal-large" >
+                                            <lightning-button-icon icon-name="utility:delete"  name={islerim.id}  alternative-text="Delete"   class="slds-m-left_xx-small" title="Delete" onclick={deleteis}></lightning-button-icon>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </li>          
+                            </template>  
+                        </ul> 
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+            
+                
+           
+    </lightning-card>
+    <lightning-card >
+        <template if:true={show}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col"> No </th>
+                        <th scope="col"> Yapilacak Is </th>
+                        <th scope="col"> yapildi mi?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={islerim} for:item='is'>
+                        <tr key={is.id} class="slds-hint-parent">
+                            <th scope="row"> {is.id} </th>
+                            <th scope="row"> {is.name} </th>
+                            <th scope="row"> <input type="checkbox" /> </th>
+                        </tr>
+                    </template>
+                    
+                </tbody>
+            </table>
+        </template>  
+    </lightning-card> 
+</template>
